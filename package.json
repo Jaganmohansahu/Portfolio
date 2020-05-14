@@ -1,0 +1,22 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio website by Jagan Mohan Sahu",
+  "main": "index.html",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jaganmohansahu/Portfolio.git"
+  },
+  "keywords": [
+    "portfolio"
+  ],
+  "author": "Jagan Mohan Sahu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jaganmohansahu/Portfolio/issues"
+  },
+  "homepage": "https://github.com/Jaganmohansahu/Portfolio#readme"
+}

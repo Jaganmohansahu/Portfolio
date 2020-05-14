@@ -1,0 +1,37 @@
+#home .offset {
+  --color: #b8860b;
+  --hover: #556b2f;
+  background: none;
+  border: 2px solid;
+  font: 1rem;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+  outline: none;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+#home .offset-btn-1 {
+  box-shadow: 0.3em 0.3em 0 0 var(--color), inset 0.3em 0.3em 0 0 var(--color);
+  color: var(--color);
+}
+
+#home .offset-btn-2 {
+  box-shadow: 0.3em 0.3em 0 0 var(--hover), inset 0.3em 0.3em 0 0 var(--hover);
+  color: var(--hover);
+}
+
+
+#home .offset-btn-1:hover {
+  box-shadow: 0 0 0 0 var(--hover), inset 6em 3.5em 0 0 var(--hover);
+  border-color: var(--hover);
+  color: #fff;
+}
+
+#home .offset-btn-2:hover {
+  box-shadow: 0 0 0 0 var(--color), inset 6em 3.5em 0 0 var(--color);
+  border-color: var(--color);
+  color: #fff;
+}

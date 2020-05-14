@@ -1,0 +1,148 @@
+.hero-section {
+	position: relative;
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.hero-section::before {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 100px;
+	background: linear-gradient(to top, #0a2a43, transparent);
+	z-index: 3;
+}
+
+.hero-section::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #0a2a43;
+	z-index: 3;
+	mix-blend-mode: color;
+}
+
+.hero-section img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	pointer-events: none;
+	z-index: -1;
+	background-repeat: no-repeat;
+	transition: 0.5s;
+}
+
+#road {
+	z-index: 2;
+}
+
+.hero-section .navbar-toggler-btn {
+	position: absolute;
+	z-index: 7;
+	top: 5%;
+	right: 5%;
+}
+
+.navbar-toggler-btn {
+	transform: scale(0.5) !important;
+}
+
+.hero-section .hamburger-line::after {
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.short-line {
+	width: 66.66%;
+	margin-left: auto;
+	transition: ease-in;
+	transition-duration: 0.25s;
+}
+
+.navbar-toggler-btn:hover .short-line,
+.open-btn .short-line {
+	width: 100%;
+	transition: ease-out;
+	transition-duration: 0.25s;
+}
+
+.hero-section .fa-cog {
+	position: absolute;
+	bottom: 5%;
+	right: 5%;
+	color: rgba(255, 255, 255, 1);
+	cursor: pointer;
+	z-index: 4;
+}
+
+#home {
+	width: 100%;
+	height: 100vh;
+	background-image: url("../images/home-bg.jpg");
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#particles-home {
+	position: absolute;
+	width: 100%;
+	height: 100vh;
+	opacity: 0.9;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+#about .card:hover {
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0) !important;
+}
+
+#about {
+	position: relative;
+}
+
+#particles-about {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 45vh;
+}
+
+#skills .chart-legend {
+	border: 2px dashed var(--theme-color);
+	margin: 2rem auto 0rem auto;
+	max-width: 50%;
+	text-align: center;
+}
+
+#home .blockquote {
+	font-size: unset;
+}
+
+#theme-btn-group-container label.active {
+	color: teal;
+}
+
+/* 
+.home {
+	background: linear-gradient(to right top, #f46b45, #eea849);
+} */
+
+/* .second-item {
+	background: linear-gradient(to right top, #005c97, #363795);
+}
+
+.third-item {
+	background: linear-gradient(to right top, #e53935, #e34d5b);
+} */

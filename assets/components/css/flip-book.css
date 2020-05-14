@@ -1,0 +1,115 @@
+.flip-book-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.flip-book-card {
+  position: relative;
+  margin: 20px 0;
+  width: 299px;
+  height: 400px;
+  background: var(--background-color);
+  transform-style: preserve-3d;
+  transform: perspective(2000px);
+  transition: 1s;
+  box-shadow: inset 300px 0px 50px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.flip-book-card:hover {
+  transform: perspective(2000px) rotate(-10deg);
+  box-shadow: inset 20px 0 50px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.flip-book-card .flip-book-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-origin: left;
+  z-index: 1;
+  transition: 1s;
+  overflow: hidden;
+}
+
+.flip-book-card:hover .flip-book-box {
+  transform: rotateY(-135deg);
+}
+
+.flip-book-card .flip-book-details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 20px;
+}
+
+.wave {
+  opacity: 1;
+  position: absolute;
+  top: 3%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  margin-left: -250px;
+  margin-top: -250px;
+  transform-origin: 50% 48%;
+  border-radius: 43%;
+  animation: drift 3000ms infinite linear;
+}
+
+.wave.one {
+  opacity: 0.7;
+}
+
+.wave.three {
+  animation: drift 5000ms infinite linear;
+  opacity: 1;
+}
+
+.wave.two {
+  animation: drift 7000ms infinite linear;
+  opacity: 0.15;
+}
+
+/*  .flip-book-box::after {
+    content: '';
+    display: block;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: -webkit-linear-gradient(to bottom, rgba(#e8a, 1), rgba(#def, 0) 80%, rgba(white, .5));
+    background-image: -moz-linear-gradient(to bottom, rgba(#e8a, 1), rgba(#def, 0) 80%, rgba(white, .5));
+    background-image: -o-linear-gradient(to bottom, rgba(#e8a, 1), rgba(#def, 0) 80%, rgba(white, .5));
+    background: linear-gradient(to bottom, #556432, #45345d);
+    z-index: 3;
+  } */
+
+.title {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  line-height: 300px;
+  text-align: center;
+  transform: translate3d(0, 0, 0);
+  color: #ffffff;
+  text-transform: uppercase;
+  font-family: monospace;
+  letter-spacing: 0.4em;
+  font-size: 24px;
+  text-indent: 0.3em;
+}
+
+@keyframes drift {
+  from {
+    transform: rotate(0deg);
+  }
+
+  from {
+    transform: rotate(360deg);
+  }
+}
