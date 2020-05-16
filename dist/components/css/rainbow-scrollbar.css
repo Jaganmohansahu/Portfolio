@@ -1,0 +1,1 @@
+::-webkit-scrollbar{width:0}.rainbow-scrollbar{position:fixed;top:0;right:0;width:12px;border-radius:10px;z-index:999;background:-webkit-gradient(linear,left top, left bottom,from(#fcb045),color-stop(#fd1d1d),to(#833ab4));background:linear-gradient(to bottom,#fcb045,#fd1d1d,#833ab4)}

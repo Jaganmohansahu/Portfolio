@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "version": "1.0.0",
-  "description": "Portfolio website by Jagan Mohan Sahu",
+  "description": "My portfolio website",
   "main": "index.html",
   "scripts": {
     "test": "npm test"
@@ -13,10 +13,31 @@
   "keywords": [
     "portfolio"
   ],
-  "author": "Jagan Mohan Sahu",
+  "author": "jagan",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Jaganmohansahu/Portfolio/issues"
   },
-  "homepage": "https://github.com/Jaganmohansahu/Portfolio#readme"
+  "homepage": "https://github.com/Jaganmohansahu/Portfolio#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-terser": "^1.2.0"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "aos": "^2.3.4",
+    "bootstrap": "^4.5.0",
+    "jquery": "^3.5.1",
+    "mdbootstrap": "^4.18.0",
+    "particles.js": "^2.0.0",
+    "popper.js": "^1.16.1",
+    "roboto-fontface": "^0.10.0",
+    "stats.js": "^0.17.0",
+    "tilt.js": "^1.2.1"
+  }
 }

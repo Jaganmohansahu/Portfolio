@@ -1,0 +1,1 @@
+$("document").ready((function(){$(".glass-card").tilt({maxTilt:20,perspective:700,easing:"cubic-bezier(0.03, 0.98, 0.52, 0.99)",scale:1.2,speed:1e3,transition:!0,disableAxis:null,reset:!0,glare:!0,maxGlare:.4})}));

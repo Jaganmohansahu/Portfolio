@@ -1,0 +1,1 @@
+$(window).scroll((function(){var w=$(window).scrollTop();dh=$(document).height(),wh=$(window).height(),scrollPercent=w/(dh-wh)*100,dw=$(document).width(),ww=$(window).width(),$(".rainbow-scrollbar").css("height",scrollPercent+"%")}));
