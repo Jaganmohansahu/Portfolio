@@ -4,6 +4,7 @@ const concat = require('gulp-concat');
 const cleanCSS = require('gulp-clean-css');
 const autoPrefixer = require('gulp-autoprefixer');
 const terser = require('gulp-terser');
+const imageMin = require('gulp-imagemin')
 
 gulp.task('html', function() {
 	return gulp.src('src/**/*.html')
@@ -12,7 +13,7 @@ gulp.task('html', function() {
 
 gulp.task('img', function() {
 	return gulp.src('src/images/**/*')
-	.pipe(imagemin())
+	.pipe(imageMin())
 	.pipe(gulp.dest('dist/images'));
 });
 
