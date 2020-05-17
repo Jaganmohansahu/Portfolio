@@ -6,23 +6,14 @@
   overflow: hidden;
   border-radius: 42px;
   box-shadow: rgba(10, 42, 67, 0.66) 0 30px 60px 0, inset #0a2a43 0 0 0 5px, inset rgba(255, 255, 255, 0.5) 0 0 0 6px;
-  -webkit-transition: 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-  transition: 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
   z-index: 5;
-  perspective: 800px;
   cursor: default;
-}
-
-.glass-card-info {
-  transform-style: preserve-3d;
   text-align: center;
   padding: 2vw 20px;
   color: #ffffff;
 }
 
-.glass-card-info h1 {
-  transition: 0.15s;
-  transform: translateZ(20px);
+.glass-card h1 {
   font-size: 2.5em;
   line-height: 1.5;
   font-weight: 700;

@@ -142,16 +142,16 @@ $('#navbar-color-chooser').change(function() {
  * Scrollbar settings
  */
 $('#dark-scrollbar').change(function() {
-    $('#scrollbar').attr("href", "assets/components/css/dark-scrollbar.css");
+    $('#scrollbar').attr("href", "components/css/dark-scrollbar.css");
 });
 
 $('#light-scrollbar').change(function() {
-    $('#scrollbar').attr("href", "assets/components/css/white-scrollbar.css");
+    $('#scrollbar').attr("href", "components/css/white-scrollbar.css");
 });
 
 $('#gradient-scrollbar').change(function() {
-    $('body').append('<script src="assets/components/js/rainbow-scrollbar.js"></script>');
-    $('#scrollbar').attr("href", "assets/components/css/rainbow-scrollbar.css");
+    $('body').append('<script src="components/js/rainbow-scrollbar.js"></script>');
+    $('#scrollbar').attr("href", "components/css/rainbow-scrollbar.css");
 });
 
 $('#default-scrollbar').change(function() {
@@ -230,7 +230,7 @@ $('.count-particles').hide();
 $('#particle-stats').change(function() {
     if (this.checked) {
         $('.count-particles').show();
-        $('body').append('<script src="assets/components/js/particles-stats.js" id="snow-particles"></script>');
+        $('body').append('<script src="components/js/particles-stats.js" id="snow-particles"></script>');
     } else {
         $('#snow-particles').remove();
         $('#particles-monitor').remove();

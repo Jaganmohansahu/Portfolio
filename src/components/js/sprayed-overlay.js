@@ -4,7 +4,7 @@ $(document).ready(function() {
         perfData = window.performance.timing,
         EstimatedTime = -(perfData.loadEventEnd - perfData.navigationStart),
         time = ((EstimatedTime / 1000) % 50) * 100;
-
+        
     /* Percentage Increment Animation */
     var PercentageID = $(".percentage"),
         start = 0,
@@ -150,10 +150,7 @@ $(document).ready(function() {
 
     homeh();
     $(window).resize(homeh);
-
-    $(".page-menu li:not(.social) a, .portfolio_filter ul li a").append(
-        "<span></span>"
-    );
+    
     /*   $(".nav-icon").on("click", function () {
           $(this).toggleClass("modal-close");
       }); */

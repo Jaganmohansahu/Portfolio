@@ -6,25 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <title>Portfolio</title>
 
-    <!-------------------- STYLES -------------------->
-
-    <!-- Google Fonts -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
         id="font">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
-    <!-- Material Design Bootstrap -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/css/mdb.min.css">
-    <!-- AOS CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-    <!-- Partials -->
+    <link rel="stylesheet" href="vendor/css/vendor.bundle.css">
     <link rel="stylesheet" href="partials/_variables.css">
     <link rel="stylesheet" href="partials/_global.css">
     <link rel="stylesheet" href="partials/responsive.css">
-    <!-- Custom Styles -->
     <link rel="stylesheet" href="components/css/flipping-hamburger-menu.css">
     <link rel="stylesheet" href="components/css/stats.css">
     <link rel="stylesheet" href="components/css/scroll-down.css">
@@ -40,11 +28,14 @@
     <link rel="stylesheet" href="components/css/text-rotation.css">
     <link rel="stylesheet" href="components/css/page-separator.css">
     <link rel="stylesheet" id="scrollbar">
-    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="60">
+
+    <!-- Preloader -->
+    <div class="preloader" style="position: fixed; width: 100%; height: 100%; z-index: 999; background-color: #000000;">
+    </div>
 
     <!-- Gradient Scrollbar -->
     <div class="rainbow-scrollbar"></div>
@@ -64,10 +55,8 @@
 
         <!-- Hero Intro-Card -->
         <div class="glass-card" data-tilt>
-            <div class="glass-card-info">
                 <h1 class="h1-responsive">Hello, I'm Jagan Mohan Sahu</h1>
-                <h1 class="h1-responsive">I'm a full-stack web developer.</h1>
-            </div>
+                <h1 class="h1-responsive">I'm a full stack web developer.</h1>
         </div>
 
         <!-- Hero Full Screen Navigation Button -->
@@ -855,26 +844,7 @@
 
     <!-------------------- SCRIPTS -------------------->
 
-    <!-- JQuery -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/js/mdb.min.js"></script>
-    <!-- Particles JS -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <!-- Stats JS -->
-    <scrip type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></scrip>
-    <!-- Tilt JS -->
-    <script type="text/javascript" src="https://unpkg.com/tilt.js@1.2.1/dest/tilt.jquery.min.js"></script>
-    <!-- AOS JS -->
-    <script type="text/javascript" src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <!-- Custom Scripts -->
+    <script type="text/javascript" src="vendor/js/vendor.bundle.js"></script>
     <script type="text/javascript" src="components/js/hero-parallax.js"></script>
     <script type="text/javascript" src="components/js/flipping-hamburger-menu.js"></script>
     <script type="text/javascript" src="components/js/sprayed-overlay.js"></script>
@@ -889,7 +859,6 @@
     <script type="text/javascript" src="components/js/animated-eye.js"></script>
     <script type="text/javascript" src="components/js/home-particles.js"></script>
     <script type="text/javascript" src="components/js/about-particles.js"></script>
-    <!-- Main Script -->
     <script src="js/script.js"></script>
 </body>
 

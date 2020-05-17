@@ -7,7 +7,7 @@
 		font-size: 1.7em;
 	}
 	
-	.glass-card-info h1 {
+	.glass-card h1 {
 		font-size: 1.2rem;
 	}
 
@@ -17,7 +17,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-	.card-info h1 {
+	.glass-card h1 {
 		font-size: 1.1em;
 	}
 
@@ -25,7 +25,7 @@
 		flex-direction: column !important;
 	}
 
-	.glass-card-info h1:nth-child(2) {
+	.glass-card h1:nth-child(2) {
 		display: none;
 	}
 

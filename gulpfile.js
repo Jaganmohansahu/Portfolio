@@ -1,33 +1,70 @@
 /* Variables definition */
 const gulp = require('gulp');
-const concat = require('gulp-concat');
 const cleanCSS = require('gulp-clean-css');
 const autoPrefixer = require('gulp-autoprefixer');
 const terser = require('gulp-terser');
-const imageMin = require('gulp-imagemin')
+const imageMin = require('gulp-imagemin');
+const concat = require('gulp-concat');
 
 gulp.task('html', function() {
 	return gulp.src('src/**/*.html')
-	.pipe(gulp.dest('dist'));
-});
-
-gulp.task('img', function() {
-	return gulp.src('src/images/**/*')
-	.pipe(imageMin())
-	.pipe(gulp.dest('dist/images'));
+		.pipe(gulp.dest('dist'));
 });
 
 gulp.task('css', function() {
 	return gulp.src('src/**/*.css')
-	.pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(autoPrefixer('last 2 versions'))
-	.pipe(gulp.dest('dist'));
+		.pipe(cleanCSS({ compatibility: 'ie8' }))
+		.pipe(autoPrefixer('last 2 versions'))
+		.pipe(gulp.dest('dist'));
 });
 
 gulp.task('js', function() {
 	return gulp.src('src/**/*.js')
-	.pipe(terser())
-	.pipe(gulp.dest('dist'));
+		.pipe(terser())
+		.pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', gulp.series('html', 'img', 'css', 'js'));
+gulp.task('img', function() {
+	return gulp.src('src/images/**/*')
+		.pipe(imageMin())
+		.pipe(gulp.dest('dist/images'));
+});
+
+gulp.task('vendor-css', function() {
+	return gulp.src(['node_modules/@fortawesome/fontawesome-free/css/all.min.css',
+		'node_modules/bootstrap/dist/css/bootstrap.min.css',
+		'node_modules/mdbootstrap/css/mdb.min.css',
+		'node_modules/aos/dist/aos.css'
+	])
+		.pipe(concat('vendor.bundle.css'))
+		.pipe(gulp.dest('src/vendor/css'))
+		.pipe(gulp.dest('dist/vendor/css'));
+});
+
+gulp.task('vendor-js', function() {
+	return gulp.src([
+		'node_modules/jquery/dist/jquery.min.js',
+		'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
+		'node_modules/mdbootstrap/js/mdb.min.js',
+		'node_modules/aos/dist/aos.js',
+		'node_modules/particles.js/particles.js',
+		'node_modules/tilt.js/dest/tilt.jquery.min.js'
+	])
+		.pipe(concat('vendor.bundle.js'))
+		.pipe(gulp.dest('src/vendor/js'))
+		.pipe(gulp.dest('dist/vendor/js'));
+});
+
+gulp.task('fontawesome', function() {
+	return gulp.src([
+		'node_modules/@fortawesome/fontawesome-free/webfonts/**/*',
+		'node_modules/@fortawesome/fontawesome-free/svgs/**/*',
+	],
+		{
+			base: 'node_modules/@fortawesome/fontawesome-free'
+		})
+		.pipe(gulp.dest('src/vendor'))
+		.pipe(gulp.dest('dist/vendor'));
+});
+
+gulp.task('default', gulp.series('html', 'img', 'css', 'js', 'vendor-css', 'vendor-js', 'fontawesome'));
