@@ -48,7 +48,8 @@ gulp.task('vendor-js', function() {
 		'node_modules/mdbootstrap/js/mdb.min.js',
 		'node_modules/aos/dist/aos.js',
 		'node_modules/particles.js/particles.js',
-		'node_modules/tilt.js/dest/tilt.jquery.min.js'
+		'node_modules/tilt.js/dest/tilt.jquery.min.js',
+		'node_modules/stats.js/build/stats.min.js'
 	])
 		.pipe(concat('vendor.bundle.js'))
 		.pipe(gulp.dest('src/vendor/js'))

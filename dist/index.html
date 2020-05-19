@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="components/css/offset-btn.css">
     <link rel="stylesheet" href="components/css/text-rotation.css">
     <link rel="stylesheet" href="components/css/page-separator.css">
+    <link rel="stylesheet" href="components/css/mdtoast.css">
     <link rel="stylesheet" id="scrollbar">
     <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -55,8 +56,8 @@
 
         <!-- Hero Intro-Card -->
         <div class="glass-card" data-tilt>
-                <h1 class="h1-responsive">Hello, I'm Jagan Mohan Sahu</h1>
-                <h1 class="h1-responsive">I'm a full stack web developer.</h1>
+            <h1 class="h1-responsive">Hello, I'm Jagan Mohan Sahu</h1>
+            <h1 class="h1-responsive">I'm a full stack web developer.</h1>
         </div>
 
         <!-- Hero Full Screen Navigation Button -->
@@ -264,14 +265,14 @@
                 <!-- Skill Contents -->
                 <div class="row">
                     <!-- Frontend Skill Column -->
-                    <div class="col col-lg-6" data-aos="fade-right">
+                    <div class="col-lg-6" data-aos="fade-right">
                         <h4 class="h4-responsive text-center text-uppercase mb-3 mt-4">
                             <strong>Frontend</strong> Skills</h4>
                         <canvas id="frontendSkillChart"></canvas>
                     </div>
 
                     <!-- Backend Skill Column -->
-                    <div class="col col-lg-6" data-aos="fade-left">
+                    <div class="col-lg-6" data-aos="fade-left">
                         <h4 class="h4-responsive text-center text-uppercase mb-3 mt-4">
                             <strong>Backend</strong> Skills</h4>
                         <canvas id="backendSkillChart"></canvas>
@@ -496,16 +497,16 @@
                                 <span class="word peter-river">JavaScript</span>
                                 <span class="word emerald">jQuery</span>
                                 <span class="word sun-flower">Bootstrap</span>
-                                <span class="word sun-flower">MDBootstrap</span>
-                                <span class="word sun-flower">Google Fonts</span>
-                                <span class="word sun-flower">Font Awesome</span>
-                                <span class="word sun-flower">AOS</span>
+                                <span class="word alizarin">MDBootstrap</span>
+                                <span class="word wisteria">Google Fonts</span>
+                                <span class="word peter-river">Font Awesome</span>
+                                <span class="word emerald">AOS</span>
                                 <span class="word sun-flower">Particles.js</span>
-                                <span class="word sun-flower">Tilt.js</span>
-                                <span class="word sun-flower">Chart.js</span>
-                                <span class="word sun-flower">Stats.js</span>
-                                <span class="word sun-flower">interesting</span>
-                                <span class="word sun-flower">interesting</span>
+                                <span class="word alizarin">Tilt.js</span>
+                                <span class="word wisteria">Chart.js</span>
+                                <span class="word peter-river">Stats.js</span>
+                                <span class="word emerald">Popper.js</span>
+                                <span class="word sun-flower">Gulp</span>
                             </h4>
                         </div>
                     </div>
@@ -707,7 +708,7 @@
                                         id="theme-btn-group-container">
                                         <label class="btn btn-sm form-check-label active" id="stylish-theme-label">
                                             <input class="form-check-input" type="radio" name="theme-btn-group"
-                                                id="stylish-theme" checked>Stylish
+                                                id="stylish-theme">Stylish
                                         </label>
                                         <label class="btn btn-sm form-check-label" id="special-theme-label">
                                             <input class="form-check-input" type="radio" name="theme-btn-group"
@@ -797,9 +798,9 @@
                                             id="custom-navbar-label">
                                             <input class="form-check-input" type="radio" name="navbar-btn-group"
                                                 id="custom-navbar"> Custom
-                                            <input type="color" name="navbar-color-chooser" id="navbar-color-chooser">
                                         </label>
                                     </div>
+                                    <input type="color" name="navbar-color-chooser" id="navbar-color-chooser">
                                 </div>
                             </div>
                         </div>
@@ -834,31 +835,52 @@
 
                 <!-- Modal Footer -->
                 <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-outline-primary">Save changes</button>
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal"
+                        id="show-bottom-modal">Save changes</button>
                     <button type="button" class="btn btn-deep-orange" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Full Height Modal Right -->
+    <!-- End of Full Height Modal Right -->
+
+    <!-- Frame Modal Bottom -->
+    <div class="modal fade bottom" id="frameModalBottom" tabindex="-1" role="dialog" style="overflow: hidden;">
+        <div class="modal-dialog modal-frame modal-bottom" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <p class="pt-3 pr-2">This website seeks your permission to save preferences in your browser's
+                            local storage.</p>
+                        <button type="button" class="btn btn-outline-success text-uppercase" data-dismiss="modal"
+                            id="save-preferences">Accept</button>
+                        <button type="button" class="btn btn-secondary text-uppercase" data-dismiss="modal"
+                            id="preference-decline">Decline</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Frame Modal Bottom -->
 
     <!-------------------- SCRIPTS -------------------->
 
-    <script type="text/javascript" src="vendor/js/vendor.bundle.js"></script>
-    <script type="text/javascript" src="components/js/hero-parallax.js"></script>
-    <script type="text/javascript" src="components/js/flipping-hamburger-menu.js"></script>
-    <script type="text/javascript" src="components/js/sprayed-overlay.js"></script>
-    <script type="text/javascript" src="components/js/gooey-footer.js"></script>
-    <script type="text/javascript" src="components/js/smooth-scroll.js"></script>
-    <script type="text/javascript" src="components/js/skill-chart.js"></script>
-    <script type="text/javascript" src="components/js/text-rotation.js"></script>
-    <script type="text/javascript" src="components/js/form-validation.js"></script>
-    <script type="text/javascript" src="components/js/snow-fall.js"></script>
-    <script type="text/javascript" src="components/js/glass-card.js"></script>
-    <script type="text/javascript" src="components/js/greeting-text.js"></script>
-    <script type="text/javascript" src="components/js/animated-eye.js"></script>
-    <script type="text/javascript" src="components/js/home-particles.js"></script>
-    <script type="text/javascript" src="components/js/about-particles.js"></script>
+    <script src="vendor/js/vendor.bundle.js"></script>
+    <script src="components/js/hero-parallax.js"></script>
+    <script src="components/js/flipping-hamburger-menu.js"></script>
+    <script src="components/js/sprayed-overlay.js"></script>
+    <script src="components/js/gooey-footer.js"></script>
+    <script src="components/js/smooth-scroll.js"></script>
+    <script src="components/js/skill-chart.js"></script>
+    <script src="components/js/text-rotation.js"></script>
+    <script src="components/js/form-validation.js"></script>
+    <script src="components/js/snow-fall.js"></script>
+    <script src="components/js/glass-card.js"></script>
+    <script src="components/js/greeting-text.js"></script>
+    <script src="components/js/animated-eye.js"></script>
+    <script src="components/js/home-particles.js"></script>
+    <script src="components/js/about-particles.js"></script>
+    <script src="components/js/mdtoast.js"></script>
     <script src="js/script.js"></script>
 </body>
 

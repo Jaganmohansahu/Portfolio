@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<style>
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  color: #fff;
+  background-color: darkorchid;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+  border: 1px solid rgba(0,0,0,.1);
+    box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,.1);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+#snackbar .close {
+	position: absolute;
+    right: 3%;
+    top: 3%;
+    outline: none;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+</style>
+</head>
+<body>
+
+<h2>Snackbar / Toast</h2>
+<p>Snackbars are often used as a tooltips/popups to show a message at the bottom of the screen.</p>
+<p>Click on the button to show the snackbar. It will disappear after 3 seconds.</p>
+
+<button class="btn btn-info" onclick="myFunction()">Show Snackbar</button>
+
+<div id="snackbar" role="alert">
+<button type="button" class="close" data-dismiss="snackbar">
+                ×
+            </button>
+<span>Some text some message..</span></div>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("snackbar");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+</script>
+
+</body>
+</html>

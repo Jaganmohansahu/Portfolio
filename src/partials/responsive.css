@@ -2,13 +2,9 @@
 	#moon {
 		object-fit: contain;
 	}
-
-	.card-info h1 {
-		font-size: 1.7em;
-	}
 	
 	.glass-card h1 {
-		font-size: 1.2rem;
+		font-size: 1.2rem !important;
 	}
 
 	footer .bubbles {
@@ -18,7 +14,7 @@
 
 @media only screen and (max-width: 600px) {
 	.glass-card h1 {
-		font-size: 1.1em;
+		font-size: 1.1rem !important;
 	}
 
 	#about .card {

@@ -24,4 +24,5 @@
     background: -webkit-gradient(radial, 50% 100%, 10, 50% 100%, 40, from(#ff4444), color-stop(0.49, #ff4444), color-stop(0.51, var(--theme-color)), to(var(--background-color)));
     -webkit-background-size: 49px 100%;
     background-size: 49px 100%;
+    margin-bottom: -1px;
 }

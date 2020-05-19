@@ -1,4 +1,80 @@
 /**
+ * Globals
+ */
+var mdtoastObj = { interactionTimeout: 3000, actionText: "OK", interaction: true };
+
+var aosObj = { easing: 'ease-out-back', duration: 800, delay: 300, once: true };
+
+var preferenceObj = {};
+
+var textColor = '#DEDAD6';
+
+var stylishThemeDark = '#4B515D';
+var stylishThemedarker = '#3E4551';
+
+var specialThemeDark = '#37474F';
+var specialThemedarker = '#263238';
+
+var elegantThemeDark = '#2E2E2E';
+var elegantThemedarker = '#212121';
+
+/* Confirmation message to store user preference for a new user */
+$('#show-bottom-modal').click(function() {
+    let newUser = false;
+    if (localStorage.getItem('preferences') === null) {
+        newUser = true;
+    }
+
+    if (newUser) {
+        setTimeout(function() {
+            $('#frameModalBottom').modal();
+        }, 1000);
+    } else {
+        $('#save-preferences').trigger('click');
+    }
+});
+
+/* Save user preferences in local storage */
+$('#save-preferences').click(function() {
+    let selectedFontFamily = $('#font-dropdown').val();
+    let selectedFontItalic = $('#font-italic').is(":checked");
+    let selectedTheme = $("input[name='theme-radio-group']").filter(":checked").attr("id");
+    let selectedDarkMode = $("input[name='theme-btn-group']").filter(":checked").attr("id");
+    let selectedColor = $('#color-val').text();
+    let selectedScrollbar = $("input[name='scrollbar-btn-group']").filter(":checked").attr("id");
+    let selectedNavbar = $("input[name='navbar-btn-group']").filter(":checked").attr("id");
+    let selectedCustomNavbar = "";
+    if (selectedNavbar === "custom-navbar") {
+        selectedCustomNavbar = $('#navbar-color-chooser').val();
+    }
+    let selectedParticleStats = $('#particle-stats').is(":checked");
+    let selectedAOS = $('#aos-input').is(":checked");
+
+    preferenceObj = {
+        font: selectedFontFamily,
+        italic: selectedFontItalic,
+        theme: selectedTheme,
+        darkMode: selectedDarkMode,
+        color: selectedColor,
+        scrollbar: selectedScrollbar,
+        navbar: selectedNavbar,
+        customNavbar: selectedCustomNavbar,
+        showParticleStats: selectedParticleStats,
+        animateOnce: selectedAOS
+    };
+
+    localStorage.setItem('preferences', JSON.stringify(preferenceObj));
+    mdtoast('Your preferences have been saved.', mdtoastObj);
+});
+
+$('#preference-decline').click(function() {
+    mdtoast('Preferences could not be saved.', { type: mdtoast.WARNING });
+});
+
+/* Initially hide the element */
+$('.count-particles').hide();
+
+/**
  * Toolltip
  */
 $("#contact form").hover(
@@ -18,6 +94,7 @@ $("#about img").hover(
         $("#about img").tooltip("toggle");
     }
 );
+
 $(".navbar-brand").hover(
     function() {
         $(".navbar-brand").tooltip("toggle");
@@ -32,34 +109,21 @@ $('.navbar-toggler-btn').on('click', function() {
 });
 
 /**
- * AOS init
+ * AOS
  */
-let aosObj = {};
-    aosObj.easing = 'ease-out-back';
-    aosObj.duration = 800;
-    aosObj.delay = 300;
-    aosObj.once = true;
-
-/* change to fade up animation in small devices */
-if($(window).innerWidth() < 768) {
-    $('[data-aos|="fade"]').attr('data-aos','fade-up'); 
-    $('[data-aos|="flip-down"]').attr('data-aos','fade-up');
+/* Change to fade up animation in small devices */
+if ($(window).innerWidth() < 768) {
+    $('[data-aos|="fade"]').attr('data-aos', 'fade-up');
+    $('[data-aos|="flip-down"]').attr('data-aos', 'fade-up');
 }
 
 AOS.init(aosObj);
 
 $('#aos-input').change(function() {
-    if (this.checked) {
-        $('#aos-status').text('(always)');
-        aosObj.once = false;
-    }else {
-        $('#aos-status').text('(once)');
-        aosObj.once = true;
-    }
-    AOS.init(aosObj);
+    setAOS(this.checked, aosObj);
 });
 
-$(window).on('resize', function(){ 
+$(window).on('resize', function() {
     AOS.refresh();
 });
 
@@ -67,22 +131,13 @@ $(window).on('resize', function(){
  * Font settings
  */
 $('#font-dropdown').change(function() {
-    var selectedFont = $('#font-dropdown').val();
-
-    if (selectedFont === "cursive") {
-        document.documentElement.style.setProperty('--font-family', 'cursive');
-    } else {
-        $('head #font').attr("href", "https://fonts.googleapis.com/css2?family=" + selectedFont + ":ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
-        document.documentElement.style.setProperty('--font-family', '"' + selectedFont + '"');
-    }
+    setFontFamily($('#font-dropdown').val());
+    // mdtoast($('#font-dropdown').val() + " font applied.", mdtoastObj);
 });
 
 $('#font-italic').change(function() {
-    if (this.checked) {
-        document.documentElement.style.setProperty('--font-style', 'italic');
-    } else {
-        document.documentElement.style.setProperty('--font-style', 'unset');
-    }
+    setItalicFont(this.checked);
+    // mdtoast("Font-style set to Italic.", mdtoastObj);
 });
 
 /**
@@ -96,66 +151,53 @@ $('#color-val').click(function() {
 });
 
 $('#theme-color-chooser').change(function() {
-    $('#color-val').html($('#theme-color-chooser').val());
-    $('#color-val').css("color", $('#theme-color-chooser').val());
-    document.documentElement.style.setProperty('--theme-color', $('#theme-color-chooser').val());
+    setColor($('#theme-color-chooser').val());
+    // mdtoast($('#theme-color-chooser').val() + ' color applied.', mdtoastObj);
 });
 
 /**
  * Navbar settings
  */
 $('#dark-navbar').change(function() {
-    $('#navbar').removeAttr("style");
-    if ($('#navbar').hasClass('navbar-light')) {
-        $('#navbar').removeClass('navbar-light');
-        $('#navbar').addClass('navbar-dark').addClass('stylish-color');
-    }
+    setDarkNavbar();
+    // mdtoast('Dark theme applied to the navigation bar.', mdtoastObj);
 });
 
 $('#light-navbar').change(function() {
-    $('#navbar').removeAttr("style");
-    if ($('#navbar').hasClass('navbar-dark')) {
-        $('#navbar').removeClass('navbar-dark').removeClass('stylish-color');
-        $('#navbar').addClass('navbar-light').addClass('white');
-    }
+    setLightNavbar();
+    // mdtoast('Light theme applied to the navigation bar.', mdtoastObj);
 });
 
-$('#custom-navbar').click(function() {
-    $('#navbar-color-chooser').trigger("click");
+$('#custom-navbar').change(function() {
+    $('#navbar-color-chooser').click();
 });
 
 $('#navbar-color-chooser').change(function() {
-    if ($('#navbar').hasClass('stylish-color')) {
-        $('#navbar').removeClass('stylish-color');
-        $('#custom-navbar-label').removeClass('btn-light-blue').css("background-color", $('#navbar-color-chooser').val());
-    } else if ($('#navbar').hasClass('white')) {
-        $('#navbar').removeClass('white');
-        $('#custom-navbar-label').removeClass('btn-light-blue').css("background-color", $('#navbar-color-chooser').val());
-    } else {
-        $('#custom-navbar-label').css("background-color", $('#navbar-color-chooser').val());
-    }
-
-    $('#navbar').css("background-color", $('#navbar-color-chooser').val());
+    setCustomNavbar($('#navbar-color-chooser').val());
+    // mdtoast(selectedNavbarCustomTheme + ' theme applied to the navigation bar.', mdtoastObj);
 });
 
 /**
  * Scrollbar settings
  */
 $('#dark-scrollbar').change(function() {
-    $('#scrollbar').attr("href", "components/css/dark-scrollbar.css");
+    setDarkScrollbar();
+    // mdtoast('Dark scrollbar theme applied.', mdtoastObj);
 });
 
 $('#light-scrollbar').change(function() {
-    $('#scrollbar').attr("href", "components/css/white-scrollbar.css");
+    setLightScrollbar();
+    // mdtoast('Light scrollbar theme applied.', mdtoastObj);
 });
 
 $('#gradient-scrollbar').change(function() {
-    $('body').append('<script src="components/js/rainbow-scrollbar.js"></script>');
-    $('#scrollbar').attr("href", "components/css/rainbow-scrollbar.css");
+    setGradientScrollbar();
+    // mdtoast('Gradient scrollbar theme applied.', mdtoastObj);
 });
 
 $('#default-scrollbar').change(function() {
-    $('#scrollbar').removeAttr("href");
+    setDefaultScrollbar();
+    // mdtoast('Default scrollbar theme applied.', mdtoastObj);
 });
 
 /**
@@ -168,52 +210,133 @@ if ($('#default-theme').is(':checked')) {
 
 /* Radio button events */
 $('#default-theme').change(function() {
+    setDefaultTheme();
+    // mdtoast('Default theme applied.', mdtoastObj);
+});
+
+$('#dark-theme').change(function() {
+    setDarkTheme();
+    // mdtoast('Stylish theme applied.', mdtoastObj);
+});
+
+$('#darker-theme').change(function() {
+    setDarkerTheme();
+    // mdtoast('Stylish theme applied.', mdtoastObj);
+});
+
+/* Button group events */
+$('#stylish-theme').change(function() {
+    setStylishTheme();
+    // mdtoast('Stylish theme applied.', mdtoastObj);
+});
+
+$('#special-theme').change(function() {
+    setSpecialTheme();
+    // mdtoast('Special theme applied.', mdtoastObj);
+});
+
+$('#elegant-theme').change(function() {
+    setElegantTheme();
+    // mdtoast('Elegant theme applied.', mdtoastObj);
+});
+
+/**
+ * Particle stats settings
+ */
+$('#particle-stats').change(function() {
+    setParticleStats(this.checked);
+});
+
+/**
+* If user prefernces found apply it
+*/
+if (localStorage.getItem('preferences') != null) {
+    preferenceObj = JSON.parse(localStorage.getItem('preferences'));
+
+    /* Font family */
+    $('#font-dropdown').val(preferenceObj.font);
+    setFontFamily(preferenceObj.font);
+
+    /* Italic font */
+    $('#font-italic').prop('checked', preferenceObj.italic);
+    setItalicFont(preferenceObj.italic);
+
+    $('#' + preferenceObj.theme).click();
+
+    if (preferenceObj.theme != 'default-theme') {
+        $('#' + preferenceObj.darkMode).click();
+    }
+
+    setColor(preferenceObj.color);
+
+    $('#' + preferenceObj.scrollbar).click();
+
+    if (preferenceObj.customNavbar != '') {
+        setCustomNavbar(preferenceObj.customNavbar);
+        $('#custom-navbar-label').addClass('active');
+        $('#custom-navbar-label').prop("checked", true);
+        
+    } else {
+        $('#' + preferenceObj.navbar).click();
+    }
+
+    /* AOS */
+    $('#aos-input').prop('checked', preferenceObj.animateOnce);
+    setAOS(preferenceObj.animateOnce, aosObj);
+
+    /* Particle stats */
+    $('#particle-stats').prop('checked', preferenceObj.showParticleStats);
+    setParticleStats(preferenceObj.showParticleStats);
+}
+
+function setFontFamily(selectedFont) {
+    if (selectedFont === "cursive") {
+        document.documentElement.style.setProperty('--font-family', 'cursive');
+    } else {
+        $('head #font').attr("href", "https://fonts.googleapis.com/css2?family=" + selectedFont + ":ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+        document.documentElement.style.setProperty('--font-family', '"' + selectedFont + '"');
+    }
+}
+
+function setItalicFont(isItalic) {
+    if (isItalic) {
+        document.documentElement.style.setProperty('--font-style', 'italic');
+    } else {
+        document.documentElement.style.setProperty('--font-style', 'unset');
+    }
+}
+
+function setDefaultTheme() {
     $('#theme-btn-group-container').hide();
     document.documentElement.style.setProperty('--background-color', '#ffffff');
     document.documentElement.style.setProperty('--text-color', '#212529');
     Chart.defaults.global.defaultFontColor = getComputedStyle(document.documentElement).getPropertyValue('--text-color');
     frontendChart.update();
     backendChart.update();
-});
+}
 
-$('#dark-theme').change(function() {
+function setDarkTheme() {
     $('#theme-btn-group-container').show();
-    $('#stylish-theme-label').css("background-color", "#4B515D");
-    $('#special-theme-label').css("background-color", "#37474F");
-    $('#elegant-theme-label').css("background-color", "#2E2E2E");
+    $('#stylish-theme-label').css("background-color", stylishThemeDark);
+    $('#special-theme-label').css("background-color", specialThemeDark);
+    $('#elegant-theme-label').css("background-color", elegantThemeDark);
     /* Set stylish theme after selecting dark mode */
-    document.documentElement.style.setProperty('--background-color', '#4B515D');
+    document.documentElement.style.setProperty('--background-color', stylishThemeDark);
     updateDarkTheme();
-});
+}
 
-$('#darker-theme').change(function() {
+function setDarkerTheme() {
     $('#theme-btn-group-container').show();
-    $('#stylish-theme-label').css("background-color", "#3E4551");
-    $('#special-theme-label').css("background-color", "#263238");
-    $('#elegant-theme-label').css("background-color", "#212121");
+    $('#stylish-theme-label').css("background-color", stylishThemedarker);
+    $('#special-theme-label').css("background-color", specialThemedarker);
+    $('#elegant-theme-label').css("background-color", elegantThemedarker);
     /* Set stylish dark theme after selecting darker mode */
-    document.documentElement.style.setProperty('--background-color', '#3E4551');
+    document.documentElement.style.setProperty('--background-color', stylishThemedarker);
     updateDarkTheme();
-});
-
-/* Button group events */
-$('#stylish-theme').change(function() {
-    document.documentElement.style.setProperty('--background-color', $('#stylish-theme-label').css("background-color"));
-    document.documentElement.style.setProperty('--text-color', '#DEDAD6');
-});
-
-$('#special-theme').change(function() {
-    document.documentElement.style.setProperty('--background-color', $('#special-theme-label').css("background-color"));
-    document.documentElement.style.setProperty('--text-color', '#DEDAD6');
-});
-
-$('#elegant-theme').change(function() {
-    document.documentElement.style.setProperty('--background-color', $('#elegant-theme-label').css("background-color"));
-    document.documentElement.style.setProperty('--text-color', '#DEDAD6');
-});
+}
 
 function updateDarkTheme() {
-    document.documentElement.style.setProperty('--text-color', '#DEDAD6');
+    document.documentElement.style.setProperty('--text-color', textColor);
     $('#stylish-theme-label').addClass('active');
     $('#special-theme-label').removeClass('active');
     $('#elegant-theme-label').removeClass('active');
@@ -223,12 +346,76 @@ function updateDarkTheme() {
     backendChart.update();
 }
 
-/**
- * Particle stats settings
- */
-$('.count-particles').hide();
-$('#particle-stats').change(function() {
-    if (this.checked) {
+function setStylishTheme() {
+    document.documentElement.style.setProperty('--background-color', $('#stylish-theme-label').css("background-color"));
+    document.documentElement.style.setProperty('--text-color', textColor);
+}
+
+function setSpecialTheme() {
+    document.documentElement.style.setProperty('--background-color', $('#special-theme-label').css("background-color"));
+    document.documentElement.style.setProperty('--text-color', textColor);
+}
+
+function setElegantTheme() {
+    document.documentElement.style.setProperty('--background-color', $('#elegant-theme-label').css("background-color"));
+    document.documentElement.style.setProperty('--text-color', textColor);
+}
+
+function setColor(selectedTheme) {
+    $('#color-val').html(selectedTheme);
+    $('#color-val').css("color", selectedTheme);
+    document.documentElement.style.setProperty('--theme-color', selectedTheme);
+}
+
+function setLightScrollbar() {
+    $('#scrollbar').attr("href", "components/css/white-scrollbar.css");
+}
+
+function setDarkScrollbar() {
+    $('#scrollbar').attr("href", "components/css/dark-scrollbar.css");
+}
+
+function setGradientScrollbar() {
+    $('body').append('<script src="components/js/rainbow-scrollbar.js"></script>');
+    $('#scrollbar').attr("href", "components/css/rainbow-scrollbar.css");
+}
+
+function setDefaultScrollbar() {
+    $('#scrollbar').removeAttr("href");
+}
+
+function setLightNavbar() {
+    $('#navbar').removeAttr("style");
+    $('#navbar').addClass('navbar-light');
+        $('#navbar').addClass('white');
+        $('#navbar').removeClass('navbar-dark');
+        $('#navbar').removeClass('stylish-color');
+}
+
+function setDarkNavbar() {
+    $('#navbar').removeAttr("style");
+        $('#navbar').removeClass('navbar-light');
+        $('#navbar').removeClass('white');
+        $('#navbar').addClass('navbar-dark');
+        $('#navbar').addClass('stylish-color');
+}
+
+function setCustomNavbar(selectedNavbarCustomTheme) {
+    if ($('#navbar').hasClass('stylish-color')) {
+        $('#navbar').removeClass('stylish-color');
+        $('#custom-navbar-label').removeClass('btn-light-blue').css("background-color", selectedNavbarCustomTheme);
+    } else if ($('#navbar').hasClass('white')) {
+        $('#navbar').removeClass('white');
+        $('#custom-navbar-label').removeClass('btn-light-blue').css("background-color", selectedNavbarCustomTheme);
+    } else {
+        $('#custom-navbar-label').css("background-color", selectedNavbarCustomTheme);
+    }
+
+    $('#navbar').css("background-color", selectedNavbarCustomTheme);
+}
+
+function setParticleStats(isParticleStats) {
+    if (isParticleStats) {
         $('.count-particles').show();
         $('body').append('<script src="components/js/particles-stats.js" id="snow-particles"></script>');
     } else {
@@ -236,4 +423,15 @@ $('#particle-stats').change(function() {
         $('#particles-monitor').remove();
         $('.count-particles').hide();
     }
-});
+}
+
+function setAOS(isAOSAlways, aosObj) {
+    if (isAOSAlways) {
+        $('#aos-status').text('(always)');
+        aosObj.once = false;
+    } else {
+        $('#aos-status').text('(once)');
+        aosObj.once = true;
+    }
+    AOS.init(aosObj);
+}

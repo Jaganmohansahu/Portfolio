@@ -1,13 +1,17 @@
-/* document.getElementById("form-submit").addEventListener("click", validateForm());
- */
 $("#contact-form").submit(function(e) {
     e.preventDefault();
     validateForm();
 
     var $form = $(this);
-    $.post($form.attr("action"), $form.serialize()).then(function() {
-        alert("Thank you!");
-    });
+    $.post($form.attr("action"), $form.serialize())
+        .done(function() {
+            $('#status').text("Sent !!").css("color", "green");
+            mdtoast('Message delivered !!', { type: mdtoast.SUCCESS });
+            $('#contact-form').closest('form').find("input[type=text], textarea").val("");
+        }).fail(function() {
+            $('#status').text("Failed !!").css("color", "red");
+            mdtoast('Failed to send message :(', { type: mdtoast.ERROR });
+        });
 });
 
 function validateForm() {
@@ -46,26 +50,3 @@ function validateForm() {
     }
     $('#status').text("Sending...").css("color", "green");
 }
-
-/* /* Ajax call
-formData = {
-    'name': $('input[name=name]').val(),
-    'email': $('input[name=email]').val(),
-    'subject': $('input[name=subject]').val(),
-    'message': $('textarea[name=message]').val()
-};
-
-
-$.ajax({
-    url: "mail.php",
-    type: "POST",
-    data: formData,
-    success: function(data, textStatus, jqXHR) {
-        $('#status').text(data.message);
-        if (data.code) //If mail was sent successfully, reset the form.
-            $('#contact-form').closest('form').find("input[type=text], textarea").val("");
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-        $('#status').text(jqXHR);
-    }
-}); */
