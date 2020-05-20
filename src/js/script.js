@@ -275,7 +275,7 @@ if (localStorage.getItem('preferences') != null) {
         setCustomNavbar(preferenceObj.customNavbar);
         $('#custom-navbar-label').addClass('active');
         $('#custom-navbar-label').prop("checked", true);
-        
+
     } else {
         $('#' + preferenceObj.navbar).click();
     }
@@ -376,8 +376,13 @@ function setDarkScrollbar() {
 }
 
 function setGradientScrollbar() {
-    $('body').append('<script src="components/js/rainbow-scrollbar.js"></script>');
-    $('#scrollbar').attr("href", "components/css/rainbow-scrollbar.css");
+    $.getScript('components/js/rainbow-scrollbar.js')
+    .done(function(script, textStatus) {
+        $('#scrollbar').attr("href", "components/css/rainbow-scrollbar.css");
+    })
+    .fail(function(jqxhr, settings, exception) {
+        mdtoast('Unable to set gradient scrollbar.', { type: mdtoast.WARNING });
+    });    
 }
 
 function setDefaultScrollbar() {
@@ -387,17 +392,17 @@ function setDefaultScrollbar() {
 function setLightNavbar() {
     $('#navbar').removeAttr("style");
     $('#navbar').addClass('navbar-light');
-        $('#navbar').addClass('white');
-        $('#navbar').removeClass('navbar-dark');
-        $('#navbar').removeClass('stylish-color');
+    $('#navbar').addClass('white');
+    $('#navbar').removeClass('navbar-dark');
+    $('#navbar').removeClass('stylish-color');
 }
 
 function setDarkNavbar() {
     $('#navbar').removeAttr("style");
-        $('#navbar').removeClass('navbar-light');
-        $('#navbar').removeClass('white');
-        $('#navbar').addClass('navbar-dark');
-        $('#navbar').addClass('stylish-color');
+    $('#navbar').removeClass('navbar-light');
+    $('#navbar').removeClass('white');
+    $('#navbar').addClass('navbar-dark');
+    $('#navbar').addClass('stylish-color');
 }
 
 function setCustomNavbar(selectedNavbarCustomTheme) {
@@ -416,10 +421,14 @@ function setCustomNavbar(selectedNavbarCustomTheme) {
 
 function setParticleStats(isParticleStats) {
     if (isParticleStats) {
-        $('.count-particles').show();
-        $('body').append('<script src="components/js/particles-stats.js" id="snow-particles"></script>');
+        $.getScript('components/js/particles-stats.js')
+            .done(function(script, textStatus) {
+                $('.count-particles').show();
+            })
+            .fail(function(jqxhr, settings, exception) {
+                mdtoast('Unable to display particle-stats.', { type: mdtoast.WARNING });
+            });
     } else {
-        $('#snow-particles').remove();
         $('#particles-monitor').remove();
         $('.count-particles').hide();
     }
