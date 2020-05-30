@@ -41,7 +41,7 @@ function validateForm() {
 
     var $form = $(this);
     $.post($form.attr("action"), $form.serialize())
-        .done(function() {
+        .then(function() {
             $('#status').text("Sent !!").css("color", "green");
             mdtoast('Message delivered !!', { type: mdtoast.SUCCESS });
             $('#contact-form').closest('form').find("input[type=text], textarea").val("");
