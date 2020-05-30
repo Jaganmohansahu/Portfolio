@@ -1,7 +1,6 @@
 /* Variables definition */
 const gulp = require('gulp');
 const cleanCSS = require('gulp-clean-css');
-const purgeCSS = require('gulp-purgecss')
 const autoPrefixer = require('gulp-autoprefixer');
 const terser = require('gulp-terser');
 const imageMin = require('gulp-imagemin');
@@ -38,9 +37,6 @@ gulp.task('vendor-css', function() {
 		'node_modules/aos/dist/aos.css'
 	])
 		.pipe(concat('vendor.bundle.css'))
-		.pipe(purgeCSS({
-			content: ['src/**/*.html']
-		}))
 		.pipe(gulp.dest('src/vendor/css'))
 		.pipe(gulp.dest('dist/vendor/css'));
 });
