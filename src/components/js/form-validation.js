@@ -45,8 +45,5 @@ function validateForm() {
             $('#status').text("Sent !!").css("color", "green");
             mdtoast('Message delivered !!', { type: mdtoast.SUCCESS });
             $('#contact-form').closest('form').find("input[type=text], textarea").val("");
-        }).fail(function() {
-            $('#status').text("Failed !!").css("color", "red");
-            mdtoast('Failed to send message :(', { type: mdtoast.ERROR });
         });
 }
