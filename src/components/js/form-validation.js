@@ -1,17 +1,6 @@
 $("#contact-form").submit(function(e) {
     e.preventDefault();
     validateForm();
-
-    var $form = $(this);
-    $.post($form.attr("action"), $form.serialize())
-        .done(function() {
-            $('#status').text("Sent !!").css("color", "green");
-            mdtoast('Message delivered !!', { type: mdtoast.SUCCESS });
-            $('#contact-form').closest('form').find("input[type=text], textarea").val("");
-        }).fail(function() {
-            $('#status').text("Failed !!").css("color", "red");
-            mdtoast('Failed to send message :(', { type: mdtoast.ERROR });
-        });
 });
 
 function validateForm() {
@@ -49,4 +38,15 @@ function validateForm() {
         return false;
     }
     $('#status').text("Sending...").css("color", "green");
+
+    var $form = $(this);
+    $.post($form.attr("action"), $form.serialize())
+        .done(function() {
+            $('#status').text("Sent !!").css("color", "green");
+            mdtoast('Message delivered !!', { type: mdtoast.SUCCESS });
+            $('#contact-form').closest('form').find("input[type=text], textarea").val("");
+        }).fail(function() {
+            $('#status').text("Failed !!").css("color", "red");
+            mdtoast('Failed to send message :(', { type: mdtoast.ERROR });
+        });
 }
