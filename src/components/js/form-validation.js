@@ -1,9 +1,6 @@
 $("#contact-form").submit(function(e) {
     e.preventDefault();
-    validateForm();
-});
 
-function validateForm() {
     /* Name validation */
     var name = $('#name').val();
     if (name == "") {
@@ -49,4 +46,4 @@ function validateForm() {
             $('#status').text("Failed !!").css("color", "red");
             mdtoast('Failed to send message :(', { type: mdtoast.ERROR });
         });
-}
+});
