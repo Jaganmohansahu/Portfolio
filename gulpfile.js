@@ -5,9 +5,11 @@ const autoPrefixer = require('gulp-autoprefixer');
 const terser = require('gulp-terser');
 const imageMin = require('gulp-imagemin');
 const concat = require('gulp-concat');
+const strip = require('gulp-strip-comments');
 
 gulp.task('html', function() {
 	return gulp.src('src/**/*.html')
+		.pipe(strip())
 		.pipe(gulp.dest('dist'));
 });
 
@@ -20,6 +22,7 @@ gulp.task('css', function() {
 
 gulp.task('js', function() {
 	return gulp.src('src/**/*.js')
+		.pipe(strip())
 		.pipe(terser())
 		.pipe(gulp.dest('dist'));
 });
@@ -52,6 +55,7 @@ gulp.task('vendor-js', function() {
 		'node_modules/stats.js/build/stats.min.js'
 	])
 		.pipe(concat('vendor.bundle.js'))
+		.pipe(strip())
 		.pipe(gulp.dest('src/vendor/js'))
 		.pipe(gulp.dest('dist/vendor/js'));
 });

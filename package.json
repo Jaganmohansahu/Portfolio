@@ -26,6 +26,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-imagemin": "^7.1.0",
     "gulp-purgecss": "^2.2.0",
+    "gulp-strip-comments": "^2.5.2",
     "gulp-terser": "^1.2.0"
   },
   "dependencies": {
