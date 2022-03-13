@@ -6,8 +6,12 @@ body {
     position: relative;
     font-family: var(--font-family), sans-serif;
     font-style: var(--font-style);
-    background-color: var(--background-color);
     color: var(--text-color);
+    background-color: transparent !important;
+}
+
+main {
+    background-color: var(--background-color);
 }
 
 /* Bold text */
